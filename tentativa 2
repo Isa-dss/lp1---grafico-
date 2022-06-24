@@ -1,0 +1,147 @@
+package br.com.primeiro;
+ 
+public class PrimeiroGrafico {
+ 
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+ 
+}
+}
+package br.com.primeiro;
+import javax.swing.JFrame;
+ 
+public class PrimeiroGrafico extends JFrame {
+ 
+   public PrimeiroGrafico() {
+      super( "Meu Primeiro Grafico" ); //Define o titulo da tela
+      //add grafico
+      this.pack(); //para ajustar automaticamente o Frame
+   }
+   public static void main(String[] args) {
+      new PrimeiroGrafico().setVisible( true );
+   }
+}
+//Cria um dataSet para inserir os dados que serão passados para a criação do gráfico tipo Pie
+DefaultPieDataset pieDataset = new DefaultPieDataset();</code>
+ 
+//Adiciona os dados ao dataSet deve somar um total de 100%
+pieDataset.setValue("A", new Integer(75));
+pieDataset.setValue("B", new Integer(10));
+pieDataset.setValue("C", new Integer(10));
+pieDataset.setValue("D", new Integer(5));
+ 
+//Cria um objeto JFreeChart passando os seguintes parametros
+JFreeChart grafico = ChartFactory.createPieChart(
+"Titulo Do Grafico", //Titulo do grafico
+pieDataset, //DataSet
+true, //Para mostrar ou não a legenda
+true, //Para mostrar ou não os tooltips
+false);
+ 
+this.add( new ChartPanel( grafico ) );
+ __________________________________________________________________________________________________________________________________________________________________
+ 
+ Classe 1
+package GraficoCovid;
+
+import org.jfree.data.category.CategoryDataset;
+
+public class ExercicioCovid {
+
+	public CategoryDataset createDataSet(ArrayList<pessoaInfectada> ListaDePessoasInfectadas) {
+		
+		DefautCategoryDataset dataset = new DefaultCategoryDataset();
+		
+		for(PessoasInfectadas pessoasInfectadas : ListaDePessoasInfectadas) {
+			dataSet.addValue(pessoasInfectada.getHoras(), pessoasInfectada.getDias(),  pessoasInfectada.getMeses(), "");
+		}
+		return dataSet;
+	}
+	
+	public JFreeChart createBarChart(CategoryDataset dataSet) {
+	
+	JFreeChart graficoBrras = ChartFactory.createBarChart {"pessoas infectadas", "", "horas", "dias", "meses", 
+	dataSet, PolotOrientation.VERTCAL, true, false, false);
+	
+	return graficoBarras;
+	
+	}
+	
+	
+	public ChartPanel criarGrafico(ArrayLista<PessoasInfectadas> listaDePessoas infectadas) {
+		
+		CategoryDataset dataSet = this.createDataSet(ListaDePessoasInfectadas);
+		
+		JFreeChart grafico = this.createBarChart(dataSet);
+		
+		painelDoGrafico.setPreferreSize(new Dimension(400, 400));
+		
+		return painelDoGrafico;
+	}
+	
+}
+
+
+
+Classe 2
+
+package GraficoCovid;
+
+public class PessoasInfectadas {
+	
+	private int horas;
+	private int dias;
+	private int meses;
+	
+	public PessoasInfectadas(String nome, int idade) {
+		this.horas = horas;
+		this.dias = dias;
+		this.meses = meses;
+	}
+	
+	public String getHoras() {
+		return horas;
+	}
+	
+	public String getDias{
+		return dias;
+	}
+	
+	public int getMeses() {
+		return meses;
+	}
+	
+
+}
+
+
+Classe 3 (janela do gráfico)
+
+package GraficoCovid;
+
+import java.aut.BorderLayout;
+
+    public JanelaboGrafico extends javax.swing.JF() (
+
+    public class JanelaGrafico {
+	initComponents();
+
+	this.jpnGrafico.setLayout (new BorderLayout ());
+	
+	ArrayList<PessoasIntfectadas> ListaDePessoasInfectadas = new ArrayLista<>();
+	ListaDePessoasInfectadas.add(new horas, dias, meses ("12:00", 1, 1));
+	ListaDePessoasInfectadas.add(new horas, dias, meses ("13:00", 2, 2));
+	ListaDePessoasInfectadas.add(new horas, dias, meses ("14:00", 3, 3));
+	ListaDePessoasInfectadas.add(new horas, dias, meses ("15:00", 4, 4));
+	ListaDePessoasInfectadas.add(new horas, dias, meses ("16:00", 5, 5));
+	
+	GraficoDeBarra graficoDeBarra = new GraficoDeBarra();
+	
+	this.JpnGrafico.setLayout (new BorderLayout());
+	this.JpnGrafico.add(graficoDeBarr.criarGrafico(listaDePessoasInfectadas));
+	
+	pack();
+
+	}
+}
+
