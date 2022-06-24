@@ -1,0 +1,101 @@
+import java.math.*; //modificar para entrar com a contaminação e constante para que sejam parametros da função
+import java.util.Scanner; //crie um metodo que plote um gráfico do periodo de contaminação (taxa de infectados): exemplo dias (desde o primeiro dias plote um grafico dos contaminados)  
+public class Covid {
+	public double infectados;
+	
+	public Covid (int tempo) {
+		infectados = Programa.contaminação_inicial*Math.exp(Programa.constante_proporcional*tempo);
+		System.out.printf("Número de infectados: %s", infectados);
+	}
+	
+	public void calc_infectados () {
+		String tempo = null;
+		Scanner sc = new Scanner (System.in);
+		System.out.print ("\n\nCalculo de infectados e insira o tempo: ");
+		while (sc.hasNext()) {
+			int t=sc.nextInt();
+			
+			if (t>0 && t<=24)
+				tempo="horas";
+			else if (t>24)
+				tempo="dias";
+			else
+				tempo="meses";
+			
+			switch (tempo) {
+			case "horas":
+				System.out.printf("Número de infectados: %s\n", this.contaminação_hora(t));
+				break;
+			case "dias":
+				System.out.printf("Número de infectados: %s\n", this.contaminação_dia(t));
+				break;
+			case "meses":
+				System.out.printf("Número de infectados: %s\n", this.contaminação_mês(t));
+				break;
+			default:
+				System.out.println ("Valor inválido\n");
+				break;
+			}
+			new GraficoLinha(infectados, tempo);
+		}
+	}
+	
+	public double contaminação_hora (int tempo) {
+		return this.infectados = Programa.contaminação_inicial*Math.exp(Programa.constante_proporcional*tempo);
+	}
+	
+	public double contaminação_dia (int tempo) {
+		return this.infectados = Programa.contaminação_inicial*Math.exp(Programa.constante_proporcional*tempo/24);
+	}
+	
+	public double contaminação_mês (int tempo) {
+		return this.infectados = Programa.contaminação_inicial*Math.exp(Programa.constante_proporcional*tempo/360);
+	}
+}
+
+____________________________________________________________________________________________________________________________________________________________________
+
+import java.util.Scanner;
+public class Programa{
+	public static int contaminação_inicial;
+	public static int constante_proporcional;
+	public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in);
+		System.out.print ("Entre com a contaminação inicial: ");
+		contaminação_inicial=sc.nextInt();
+		System.out.print ("Entre com a constante de proporcionalidade: ");
+		constante_proporcional=sc.nextInt();
+		
+		Covid calc_infectados = new Covid (1);
+		calc_infectados.calc_infectados();
+	}
+}
+__________________________________________________________________________________________________________________________________________________________________
+
+import javax.swing.JFrame;
+import org.jfree.chart.*;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+public class GraficoLinha extends JFrame{
+	public GraficoLinha(double infectados, String tempo) {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Gráfico de Linha");
+		setSize(950, 700);
+		setLocationRelativeTo(null);
+		criarGrafico(infectados, tempo);
+		setVisible(true);
+	}
+	
+	public void criarGrafico(double infectados, String tempo) {
+		DefaultCategoryDataset linha = new DefaultCategoryDataset();
+		linha.addValue(infectados, "0", tempo);
+		
+		JFreeChart grafico = ChartFactory.createLineChart("Gráfico de infectados", "Tempo", "Número", linha, PlotOrientation.VERTICAL, true, true, false);
+		ChartPanel painel = new ChartPanel(grafico);
+		add(painel);
+	}
+}
+
+
+
