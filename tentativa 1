@@ -1,0 +1,80 @@
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.contour.ContourDataset;
+
+public class GraficoCovid extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public GraficoCovid() {
+	
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setTitle("Grafico Barra");
+	setSize(500, 500);
+	
+	criandoGF(null);
+	setVisible(true);
+}
+
+public void criandoGF(GraficoDdos[] pessoasinfectadas) {
+
+	
+	DefaultCategoryDataset bra = new DefaultCategoryDataset();
+	for (GraficoDdos GraficoDdos : pessoasinfectadas) {
+		bra.setValue( GraficoDdos.getHour(), "Horas", "");
+		bra.setValue(GraficoDdos.getDays(), "Dias", "");		
+		bra.setValue(GraficoDdos.getMounth(), "Meses", "");
+	}
+	
+    JFreeChart grafico = ChartFactory.createBarChart("A", "B", "C", bra, PlotOrientation.VERTICAL, false,true,true);
+	ChartPanel painel = new ChartPanel(grafico);
+	add(painel);
+	}
+
+public static void main(String[] args) {
+	new GraficoCovid();
+
+}
+}
+_________________________________________________________________________________________________________________________________________________________________
+
+DADOS
+
+import java.util.Scanner;
+public class GraficoDdos {
+
+	public int Hour;
+	public int Days;
+	public int Mounth;
+	
+	public GraficoDdos (int Hour, int Days,int Mounth) {
+		System.out.printf("\nInsira a hora:");
+		this.Hour = Hour;
+		
+		System.out.printf("\nInsira os dias:");
+		this.Days = Days;
+		
+		System.out.printf("\nInsira os meses:");
+		this.Mounth = Mounth;
+		
+	}
+
+	public int getHour() {
+		return this.Hour;
+		}
+	public int getDays(){
+		return this.Days;
+	}
+	
+	public int getMounth() {
+		return this.Mounth;
+	}
+	
+		
+	}
